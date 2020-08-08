@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import League from './League/League';
+import ILeague, { getLeague } from './LeagueService';
+import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+	const [league, setLeague] = useState<ILeague>({
+		name: '',
+		start: '',
+		matches: []
+	});
+
+	useEffect(() => {
+		updateLeague();
+	}, []);
+
+	const updateLeague = async () => {
+		setLeague(await getLeague(177161));
+	}
+	
+	return (
+		<div className="app-container">
+			<League league={league} />
+		</div>
+	)
 }
-
-export default App;

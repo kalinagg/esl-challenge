@@ -1,0 +1,22 @@
+@import '../Common.scss';
+
+.league-container {
+    width: 100%;
+
+    .league {
+        background: $white;
+        border-radius: 2px;
+        border-top: 6px solid $green;
+        margin-bottom: 16px;
+        padding: 16px;
+
+        .league-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .league-date {
+            font-size: .8rem;
+        }
+    }
+}

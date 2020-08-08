@@ -1,0 +1,51 @@
+@import '../Common.scss';
+
+$arrow-size: 5px;
+$arrow-border: $arrow-size solid $very-dark-grey;
+$arrow-border-transparent: $arrow-size solid transparent;
+
+%arrow {
+    content: '';
+    display: block;
+    margin: 2px 0 0 6px;
+    width: 0; 
+    height: 0; 
+    border-left: $arrow-border-transparent;
+    border-right: $arrow-border-transparent;
+}
+
+.matches-container {
+    background: $white;
+    border-radius: 2px;
+
+    .matches-date {
+        display: flex;
+        justify-content: right;
+        padding: 16px 24px;
+
+        .matches-date-button {
+            display: flex;
+            align-items: center;
+            background: $white;
+            border: 1px solid $grey;
+            border-radius: 2px;
+            padding: 5px 8px;
+            font-size: .9rem;
+            cursor: pointer;
+
+            &.arrow-down {
+                &::after {
+                    @extend %arrow;
+                    border-top: $arrow-border;
+                }
+            }
+            
+            &.arrow-up {
+                &::after {
+                    @extend %arrow;
+                    border-bottom: $arrow-border;
+                }
+            }
+        }
+    }
+}

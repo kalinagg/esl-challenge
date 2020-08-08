@@ -1,0 +1,10 @@
+@import './Common.scss';
+
+body {
+	color: $very-dark-grey;
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	background: $light-grey;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
