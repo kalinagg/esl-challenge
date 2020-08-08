@@ -1,5 +1,5 @@
 import React from 'react';
-import { IParticipant } from '../LeagueService';
+import {IParticipant} from '../LeagueService';
 import './Participant.scss';
 
 export default function Participant(props: {participant: IParticipant, winner: (participantId: number) => boolean}) {

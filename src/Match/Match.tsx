@@ -1,8 +1,7 @@
 import React from 'react'
 import Participant from '../Participant/Participant';
-import { IMatch, IParticipant } from '../LeagueService';
+import {IMatch, IParticipant} from '../LeagueService';
 import './Match.scss';
-import { time } from 'console';
 
 export default function Match(props: {match: IMatch}) {
     const match = props.match;

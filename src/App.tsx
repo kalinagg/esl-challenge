@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import League from './League/League';
-import ILeague, { getLeague } from './LeagueService';
+import ILeague, {getLeague} from './LeagueService';
 import './App.scss';
 
 export default function App() {

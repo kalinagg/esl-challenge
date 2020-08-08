@@ -57,7 +57,7 @@ async function getMatches(leagueId: number): Promise<IMatch[]> {
         start: r.beginAt,
         participants: r.participants.map(p => ({
             id: p.id,
-            name: contestantsLookup[p.id].name,
+            name: contestantsLookup[p.id] ? contestantsLookup[p.id].name : "Account not found",
             points: p.points[0],
             place: p.place
         }))
@@ -66,7 +66,7 @@ async function getMatches(leagueId: number): Promise<IMatch[]> {
     return matches;
 }
 
-export async function getLeague(leagueId: number):Promise<ILeague> {
+export async function getLeague(leagueId: number): Promise<ILeague> {
     const response = await fetch(`https://api.eslgaming.com/play/v1/leagues/${leagueId}`);
     const leagueResponse: ILeagueResponse = await response.json();
 
