@@ -6,7 +6,7 @@ import './App.scss';
 export default function App() {
 	const [league, setLeague] = useState<ILeague>({
 		name: '',
-		start: '',
+		start: new Date(),
 		matches: []
 	});
 

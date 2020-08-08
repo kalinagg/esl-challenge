@@ -8,24 +8,20 @@ export default function Match(props: {match: IMatch}) {
     const participants = match.participants;
 
     const sortParticipants = (ps: IParticipant[]): IParticipant[] => {
-        ps.sort(compareByPlace);
+        ps = [...ps];
+        ps.sort((a, b) => a.place - b.place);
         return ps;
     }
 
-    const compareByPlace = (a: IParticipant, b: IParticipant): number => a.place - b.place;
-
     const sortedParticipants = sortParticipants(participants);
 
-    const winner = (participantId: number): boolean => {
-        return participantId === sortedParticipants[0].id;
-    }
+    const winnerId = sortedParticipants[0].id;
 
-    const formatedTime = (date: string): string => {
-        const hours = new Date(date).getHours();
-        const minutes = new Date(date).getMinutes();
-        const zero = minutes < 9 ? '0' : '';
-        
-        return `${hours}:${zero}${minutes}`;
+    const formatedTime = (date: Date): string => {        
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
     }
 
     return (
@@ -34,7 +30,7 @@ export default function Match(props: {match: IMatch}) {
                 {formatedTime(match.start)}
             </div>
             {sortedParticipants.map(p => (
-                <Participant key={p.id} participant={p} winner={winner} />
+                <Participant key={p.id} participant={p} winner={p.id === winnerId} />
             ))}
         </div>
     )

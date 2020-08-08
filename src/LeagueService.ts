@@ -1,12 +1,12 @@
 export default interface ILeague {
     name: string;
-    start: string;
+    start: Date;
     matches: IMatch[];
 }
 
 export interface IMatch {
     id: number;
-    start: string;
+    start: Date;
     participants: IParticipant[];
 }
 
@@ -54,7 +54,7 @@ async function getMatches(leagueId: number): Promise<IMatch[]> {
 
     const matches: IMatch[] = results.map(r => ({
         id: r.id,
-        start: r.beginAt,
+        start: new Date(r.beginAt),
         participants: r.participants.map(p => ({
             id: p.id,
             name: contestantsLookup[p.id] ? contestantsLookup[p.id].name : "Account not found",
@@ -72,7 +72,7 @@ export async function getLeague(leagueId: number): Promise<ILeague> {
 
     return {
         name: leagueResponse.name.full,
-        start: leagueResponse.timeline.inProgress.begin,
+        start: new Date(leagueResponse.timeline.inProgress.begin),
         matches: await getMatches(leagueId)
     }
 }

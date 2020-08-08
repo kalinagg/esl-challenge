@@ -1,38 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {IMatch} from '../LeagueService';
 import Match from '../Match/Match';
 import './Matches.scss';
 
 export default function Matches(props: {matches: IMatch[]}) {
-    const [matches, setMatches] = useState<IMatch[]>(props.matches);
     const [sortAscending, setSortAscending] = useState(true);
 
     const sortMatches = (ms: IMatch[], sortAscending: boolean): IMatch[] => { 
+        ms = [...ms];
+
         if (sortAscending) {
-            ms.sort(compareByTime);
+            ms.sort((a, b) => a.start.getTime() - b.start.getTime());
             return ms;
         }
 
-        ms.sort((a, b) => -1 * compareByTime(a, b));
+        ms.sort((a, b) => b.start.getTime() - a.start.getTime());
         return ms;       
-    }
-    
-    const compareByTime = (a: IMatch, b: IMatch): number => {
-        const aStart = a.start.toUpperCase();
-        const bStart = b.start.toUpperCase();
-        
-        if (aStart < bStart) return -1;
-        if (aStart > bStart) return 1;
-        return 0;
     }
 
     const handleReverse = () => {       
         setSortAscending(!sortAscending);
-    }    
-
-    useEffect(() => {
-        setMatches(props.matches);
-    }, [props.matches]);
+    }
 
     return (
         <div className="matches-container">
@@ -44,7 +32,7 @@ export default function Matches(props: {matches: IMatch[]}) {
                 </button>
             </div>
             <div className="matches">
-                {sortMatches(matches, sortAscending).map(m => (
+                {sortMatches(props.matches, sortAscending).map(m => (
                     <Match key={m.id} match={m} />
                 ))}
             </div>
