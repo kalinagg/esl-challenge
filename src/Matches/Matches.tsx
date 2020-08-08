@@ -4,6 +4,9 @@ import Match from '../Match/Match';
 import './Matches.scss';
 
 export default function Matches(props: {matches: IMatch[]}) {
+    const [matches, setMatches] = useState<IMatch[]>(props.matches);
+    const [sortAscending, setSortAscending] = useState(true);
+
     const sortMatches = (ms: IMatch[], sortAscending: boolean): IMatch[] => { 
         if (sortAscending) {
             ms.sort(compareByTime);
@@ -22,9 +25,6 @@ export default function Matches(props: {matches: IMatch[]}) {
         if (aStart > bStart) return 1;
         return 0;
     }
-
-    const [matches, setMatches] = useState<IMatch[]>(props.matches);
-    const [sortAscending, setSortAscending] = useState(true);
 
     const handleReverse = () => {       
         setSortAscending(!sortAscending);
