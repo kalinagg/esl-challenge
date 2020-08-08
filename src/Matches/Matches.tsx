@@ -28,13 +28,7 @@ export default function Matches(props: {matches: IMatch[]}) {
 
     const handleReverse = () => {       
         setSortAscending(!sortAscending);
-    }
-
-    const reverseSortMatches = (ms: IMatch[]): IMatch[] => {
-        ms = [...ms];
-        ms.reverse();
-        return ms;
-    }
+    }    
 
     useEffect(() => {
         setMatches(props.matches);
